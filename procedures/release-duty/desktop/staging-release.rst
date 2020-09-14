@@ -30,6 +30,10 @@ try <https://firefox-source-docs.mozilla.org/tools/try/selectors/release.html>`_
 -  make sure you're up to date with the tip of the repo
 -  ``mach try release --version <future-version.0> --migration beta-to-release --tasks release-sim``
 
+If you're making changes to scriptworkers, and have pushed them to the dev instances, you can use
+``--worker-suffix`` have them used instead of the production ones. For example, to use the dev balrogscript
+workers: ``--worker-suffix balrog=-dev``.
+
 These will create try pushes that look-alike the repos once they are
 merged. Once the decision tasks of the newly created CI graphs are
 green, staging releases can be created off of them via the
@@ -43,8 +47,9 @@ One caveat here is the list of partials that needs to be filled-in.
 :warning: The partials need to exist in
 `S3 <http://ftp.stage.mozaws.net/pub/firefox/releases/>`__ and be valid
 releases in `Balrog
-staging <https://balrog-admin-static-stage.stage.mozaws.net/>`__.
-
+staging <https://balrog-admin-static-stage.stage.mozaws.net/>`__. You can use the
+`just-give-me-partials.sh <https://hg.mozilla.org/build/braindump/file/tip/releases-related/just-give-me-partials.sh`__
+script to help you find these. Eg: ``bash just-give-me-partials.sh firefox beta``.
 
 Once the staging releases are being triggered, it's highly recommended
 that at least a comment is being dropped to Sheriffs team
